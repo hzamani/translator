@@ -7,11 +7,11 @@ require "translator/version"
 Gem::Specification.new do |s|
   s.name        = "translator"
   s.version     = Translator::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Translator."
-  s.description = "TODO: Description of Translator."
+  s.authors     = ["Hassan Zamani"]
+  s.email       = ["hsn.zamani@gmail.com"]
+  s.homepage    = "https://github.com/hzamani/translator"
+  s.summary     = "Rails plugin for model translation."
+  s.description = "Translator uses postgres hstore to keep model translations in your database."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
