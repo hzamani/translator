@@ -1,4 +1,6 @@
 module Translator
+  mattr_accessor :fallback_locale
+
   module Translates
     extend ActiveSupport::Concern
 
@@ -22,9 +24,8 @@ module Translator
 
       def read_translation name, locale
         data = read_attribute name
-        locale = locale.to_s
         if data.is_a? Hash
-          data[locale]
+          data[locale.to_s] || data[Translator.fallback_locale]
         else
           data
         end
