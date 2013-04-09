@@ -51,7 +51,12 @@ module Translator
         self.translated_attributes = args
         self.translated_attributes.each do |name|
           translated_attr_accessor name
+          translations_attr_accessor name
         end
+      end
+
+      def translates? name
+        translator_fields.include? name
       end
 
       def translated_attributes
@@ -79,6 +84,15 @@ module Translator
           define_method "#{locale}_#{name}=" do |value|
             add_translation name, locale => value
           end
+        end
+      end
+
+      def translations_attr_accessor name
+        define_method "#{name}_translations" do
+          read_attribute name
+        end
+        define_method "#{name}_translations=" do |value|
+          write_attribute name, value
         end
       end
     end
