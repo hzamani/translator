@@ -23,18 +23,20 @@ describe 'Translator' do
     end
 
     it "adds locale prefix attribute accessors for translated attributes" do
-      pending
       post = Post.new
       post.should respond_to(:en_title)
       post.should respond_to(:fa_title)
       post.should respond_to(:en_title=)
-      post.should respond_to(:de_title=)
+      post.should respond_to(:fa_title=)
       post.fa_title = 'اولین پست'
       post.en_title = 'New Post'
       post.save
       post.reload
       post.fa_title.should == 'اولین پست'
       post.en_title.should == 'New Post'
+      post.title.should == 'New Post'
+      I18n.locale = :fa
+      post.title.should == 'اولین پست'
     end
 
     describe "#translated_attributes" do

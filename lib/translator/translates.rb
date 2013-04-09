@@ -7,6 +7,14 @@ module Translator
     @@fallback_locale ||= nil
   end
 
+  def self.prefixed_locales= locales
+    @@prefixed_locales = locales
+  end
+
+  def self.prefixed_locales
+    @@prefixed_locales ||= []
+  end
+
   module Translates
     extend ActiveSupport::Concern
 
@@ -63,6 +71,14 @@ module Translator
         end
         define_method "#{name}=" do |value|
           add_translation name, I18n.locale => value
+        end
+        Translator.prefixed_locales.each do |locale|
+          define_method "#{locale}_#{name}" do
+            read_translation name, locale
+          end
+          define_method "#{locale}_#{name}=" do |value|
+            add_translation name, locale => value
+          end
         end
       end
     end
