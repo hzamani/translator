@@ -1,5 +1,11 @@
 module Translator
-  mattr_accessor :fallback_locale
+  def self.fallback_locale= locale
+    @@fallback_locale = locale.to_s
+  end
+
+  def self.fallback_locale
+    @@fallback_locale ||= nil
+  end
 
   module Translates
     extend ActiveSupport::Concern
