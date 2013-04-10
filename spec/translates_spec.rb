@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe 'Translator' do
-  describe 'translates' do
+describe "ActiveRecord::Base" do
+  describe "#translates" do
     before :each do
       I18n.locale = :en
     end
@@ -38,11 +38,11 @@ describe 'Translator' do
       I18n.locale = :fa
       post.title.should == 'اولین پست'
     end
+  end
 
-    describe "#translated_attributes" do
-      it "return list of translated attribute names" do
-        Post.translated_attributes.should == [:title, :content]
-      end
+  describe "#translated_attributes" do
+    it "return list of translated attribute names" do
+      Post.translated_attributes.should == [:title, :content]
     end
   end
 end
