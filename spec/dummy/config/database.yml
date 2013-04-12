@@ -2,7 +2,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: translatior_gem_development
-  username: hassan
+  username: postgres
   password:
   timeout: 5000
   pool: 5
@@ -11,16 +11,7 @@ test:
   adapter: postgresql
   encoding: unicode
   database: translatior_gem_test
-  username: hassan
-  password:
-  timeout: 5000
-  pool: 5
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: translatior_gem
-  username: deployer
+  username: postgres
   password:
   timeout: 5000
   pool: 5

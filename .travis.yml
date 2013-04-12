@@ -4,3 +4,5 @@ rvm:
   - 2.0.0
 script:
   - bundle exec rspec
+before_script:
+  - psql -c 'create database translatior_gem_test;' -U postgres
