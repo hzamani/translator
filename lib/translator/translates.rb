@@ -4,6 +4,16 @@ module Translator
     def fallback_locale= (locale)  @@fallback_locale    = locale.to_s end
     def prefixed_locales ()        @@prefixed_locales ||= []          end
     def prefixed_locales=(locales) @@prefixed_locales   = locales     end
+
+    def prefixed name
+      if prefixed_locales.empty?
+        name.to_sym
+      else
+        prefixed_locales.map do |locale|
+          "#{locale}_#{name}".to_sym
+        end
+      end
+    end
   end
 
   module Translates
@@ -45,18 +55,8 @@ module Translator
         @@translated_attributes ||= []
       end
 
-      def translator_prefixed name
-        if Translator.prefixed_locales.empty?
-          name.to_sym
-        else
-          Translator.prefixed_locales.map do |locale|
-            "#{locale}_#{name}".to_sym
-          end
-        end
-      end
-
       def prefixed_attributes
-        @@prefixed_attributes ||= translated_attributes.map{ |a| translator_prefixed(a) }.flatten
+        @@prefixed_attributes ||= translated_attributes.map{ |a| Translator.prefixed(a) }.flatten
       end
 
       protected
