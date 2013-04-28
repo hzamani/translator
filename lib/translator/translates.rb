@@ -1,9 +1,9 @@
 module Translator
   class << self
-    def fallback_locale  ()        @@fallback_locale  ||= nil         end
-    def fallback_locale= (locale)  @@fallback_locale    = locale.to_s end
-    def prefixed_locales ()        @@prefixed_locales ||= []          end
-    def prefixed_locales=(locales) @@prefixed_locales   = locales     end
+    def fallback_locale  ()        @fallback_locale  ||= nil         end
+    def fallback_locale= (locale)  @fallback_locale    = locale.to_s end
+    def prefixed_locales ()        @prefixed_locales ||= []          end
+    def prefixed_locales=(locales) @prefixed_locales   = locales     end
 
     def prefixed name
       if prefixed_locales.empty?
@@ -52,17 +52,17 @@ module Translator
       end
 
       def translated_attributes
-        @@translated_attributes ||= []
+        @translated_attributes ||= []
       end
 
       def prefixed_attributes
-        @@prefixed_attributes ||= translated_attributes.map{ |a| Translator.prefixed(a) }.flatten
+        @prefixed_attributes ||= translated_attributes.map{ |a| Translator.prefixed(a) }.flatten
       end
 
       protected
 
       def translated_attributes= value
-        @@translated_attributes = value
+        @translated_attributes = value
       end
 
       def translated_attr_accessor name
