@@ -45,17 +45,18 @@ module Translator
         @@translated_attributes ||= []
       end
 
-      def prefixed_attributes
-        @@prefixed_attributes ||=
-          if translated_attributes.empty?
-            translated_attributes
-          else
-            translated_attributes.map do |attrib|
-              Translator.prefixed_locales.map do |locale|
-                "#{locale}_#{attrib}".to_sym
-              end
-            end.flatten
+      def translator_prefixed name
+        if Translator.prefixed_locales.empty?
+          name.to_sym
+        else
+          Translator.prefixed_locales.map do |locale|
+            "#{locale}_#{name}".to_sym
           end
+        end
+      end
+
+      def prefixed_attributes
+        @@prefixed_attributes ||= translated_attributes.map{ |a| translator_prefixed(a) }.flatten
       end
 
       protected
