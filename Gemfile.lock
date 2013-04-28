@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    translator (0.0.1)
+    hstore-translator (0.0.1)
       activerecord-postgres-hstore
       rails (>= 3.2)
 
@@ -112,7 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgres-hstore
+  hstore-translator!
   jquery-rails
   pg
   rspec-rails
-  translator!
