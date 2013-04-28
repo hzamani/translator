@@ -45,6 +45,19 @@ module Translator
         @@translated_attributes ||= []
       end
 
+      def prefixed_attributes
+        @@prefixed_attributes ||=
+          if translated_attributes.empty?
+            translated_attributes
+          else
+            translated_attributes.map do |attrib|
+              Translator.prefixed_locales.map do |locale|
+                "#{locale}_#{attrib}".to_sym
+              end
+            end.flatten
+          end
+      end
+
       protected
 
       def translated_attributes= value
@@ -53,6 +66,8 @@ module Translator
 
       def translated_attr_accessor name
         serialize name, ActiveRecord::Coders::Hstore
+
+        attr_accessible *prefixed_attributes
 
         define_method("#{name}")  { |locale=nil| translated name, locale || I18n.locale }
         define_method("#{name}=") { |value|      translate  name, I18n.locale => value }

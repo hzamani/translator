@@ -40,6 +40,20 @@ describe "ActiveRecord::Base" do
     end
   end
 
+  describe "#prefixed_attributes" do
+    context "Translator prefixes set" do
+      it "return a list of prefixed attributes" do
+        Post.prefixed_attributes.should == [:en_title, :fa_title, :en_content, :fa_content]
+      end
+    end
+    
+    context "Translator prefixes not set" do
+      it "return list of attributes" do
+        pending
+      end
+    end
+  end
+
   describe "#translated_attributes" do
     it "return list of translated attribute names" do
       Post.translated_attributes.should == [:title, :content]
