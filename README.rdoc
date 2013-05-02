@@ -9,11 +9,12 @@ This plugin uses postgres hstore, so postgres is a must.
 
 == How to Install
 
-Do a
-  gem install translator
-or add
-  gem 'translator'
-to your Gemfile and run
+Install the gem
+  gem install rails-translator
+add
+  gem 'activerecord-postgres-hstore'
+  gem 'rails-translator'
+to your Gemfile and run bundler
   bundle install
 
 == How to Use
@@ -27,7 +28,7 @@ Generate your models but use +hstore+ for translatable string and text fields.
 
   rails g model Post title:hstore content:hstore published_at:datatime
 
-add hstore_index for hstore columns:
+optionally add hstore_index for hstore columns:
 
   # migration file
   add_hstore_index :posts, :title
@@ -40,7 +41,7 @@ tell which fields do you want to have translations:
     # ...
   end
 
-now post has locale based attribute accessord:
+now post has locale based attribute accessors:
 
   I18n.locale = :en
   p = Post.create title: 'first post', content: 'This is my first post.'

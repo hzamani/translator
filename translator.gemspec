@@ -5,7 +5,7 @@ require "translator/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "hstore-translator"
+  s.name        = "rails-translator"
   s.version     = Translator::VERSION
   s.authors     = ["Hassan Zamani"]
   s.email       = ["hsn.zamani@gmail.com"]
