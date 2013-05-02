@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hstore-translator (0.0.1)
+    rails-translator (0.0.1)
       activerecord-postgres-hstore
       rails (>= 3.2)
 
@@ -54,7 +54,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.22)
+    mime-types (1.23)
     multi_json (1.7.2)
     pg (0.15.1)
     pg-hstore (1.1.7)
@@ -112,7 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgres-hstore
-  hstore-translator!
   jquery-rails
   pg
+  rails-translator!
   rspec-rails
