@@ -1,3 +1,53 @@
 = Translator
+{<img src="https://travis-ci.org/hzamani/translator.png" />}[https://travis-ci.org/hzamani/translator]
 
-This project rocks and uses MIT-LICENSE.
+This is a rails plugin to translate models data.
+
+== Requirements
+
+This plugin uses postgres hstore, so postgres is a must.
+
+== How to Install
+
+Do a
+  gem install translator
+or add
+  gem 'translator'
+to your Gemfile and run
+  bundle install
+
+== How to Use
+
+First be sure to install postgres hstore extension, by
+
+  rails g hstore:setup
+  rake db:migrate
+
+Generate your models but use +hstore+ for translatable string and text fields.
+
+  rails g model Post title:hstore content:hstore published_at:datatime
+
+add hstore_index for hstore columns:
+
+  # migration file
+  add_hstore_index :posts, :title
+  add_hstore_index :posts, :content
+
+tell which fields do you want to have translations:
+
+  class Post < ActiveRecord::Base
+    translates :title, :content
+    # ...
+  end
+
+now post has locale based attribute accessord:
+
+  I18n.locale = :en
+  p = Post.create title: 'first post', content: 'This is my first post.'
+  I18n.locale = :fa
+  p.title = ''
+
+
+
+  
+
