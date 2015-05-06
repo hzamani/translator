@@ -49,6 +49,3 @@ now post has locale based attribute accessors:
   p.title = ''
 
 
-
-  
-

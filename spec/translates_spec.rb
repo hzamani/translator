@@ -8,7 +8,7 @@ describe "ActiveRecord::Base" do
       I18n.locale = :en
     end
 
-    it "change translated attribute accessors to locale version" do
+    it "changes translated attribute accessors to locale version" do
       post = Post.new title: 'New Post', content: 'This is a test post'
       I18n.locale = :fa
       post.title = 'اولین پست'
@@ -29,6 +29,7 @@ describe "ActiveRecord::Base" do
       post.should respond_to(:en_title=)
       post.should respond_to(:fa_title=)
       post.fa_title = 'اولین پست'
+      post.title_changed?.should == true
       post.en_title = 'New Post'
       post.save
       post.reload
@@ -42,15 +43,13 @@ describe "ActiveRecord::Base" do
 
   describe "#prefixed_attributes" do
     context "Translator prefixes set" do
-      it "return a list of prefixed attributes" do
+      it "returns a list of prefixed attributes" do
         Post.prefixed_attributes.should == [:en_title, :fa_title, :en_content, :fa_content]
       end
     end
-    
+
     context "Translator prefixes not set" do
-      it "return list of attributes" do
-        pending
-      end
+      it "returns list of attributes"
     end
   end
 

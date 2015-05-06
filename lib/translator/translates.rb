@@ -25,6 +25,7 @@ module Translator
         raise ArgumentError.new "translations should be a hash" unless translations.is_a?(Hash)
         data.update Hash[translations.map { |k,v| [k.to_s, v] }]
         write_attribute name, data
+        send "#{name}_will_change!".to_sym
         data
       end
 
